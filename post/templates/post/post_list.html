@@ -1,0 +1,32 @@
+
+{% extends 'base.html' %}
+
+{% block base_head %}
+		{% if category_name %}
+			{{block.super}}| {{category_name}}</title>
+		{% else %}
+			{{block.super}}| Blogs  </title>
+		{% endif %}
+
+{% endblock base_head %}
+
+{% block content %}
+
+	{% for obj in object_list %}
+	<div class = col-lg-2></div>
+	{% include "snippets/card.html" with instance=obj %}
+	<div class = col-lg-2></div>
+		{% endfor %}
+
+{% endblock content %}
+
+
+
+
+
+
+
+
+
+
+

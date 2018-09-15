@@ -1,0 +1,8 @@
+
+<h3 class="ml-3">Category</h3>
+<hr>
+<ul>
+{% for obj in list %}
+	<li class="my-1"> <a href="{{ obj.get_absolute_url }}">{{obj.title}}</a></li>
+{% endfor%}
+</ul>

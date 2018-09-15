@@ -1,0 +1,13 @@
+<div class="card  border-light mb-3 " style= "max-width: 40rem;">
+  <div class="card-body">
+    <h5 class="card-title"> <a href={{instance.get_absolute_url}}>{{instance.title}}</a> </h5>
+    <h6 class="card-subtitle mb-2 text-muted">{{instance.author}} |
+     {{instance.published|date:"M d, Y"}}</h6>
+    <p class="card-text">{% autoescape off %}
+						    {{instance.body|truncatechars_html:250}}
+						 {% endautoescape %}
+	</p>
+    <a href={{instance.get_absolute_url}} class="card-link">Read More</a>
+  </div>
+</div>
+<hr>

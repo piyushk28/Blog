@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block base_head %}
+		{{block.super}}| {{object.title}}  </title>
+
+{% endblock base_head %}
+
+{% block content %}
+	<h1 class="text-center">{{object.title}}</h1> <br>
+	<h6>Category : {{object.category}}</h6><br>
+	{% autoescape off%}
+	{{object.body}}
+	{% endautoescape %}<br>
+	<hr>
+	<h5 >Author : {{object.author}}</h5>
+{% endblock content %}
+
+
