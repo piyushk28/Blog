@@ -4,7 +4,7 @@ AbstractBaseUser, BaseUserManager )
 
 class UserManager(BaseUserManager):
 	# Creating User
-	def create_user(self,email,full_name,password=None, is_staff=False,is_admin=False,is_active=True): #must need 'required fields' as Arguments
+	def create_user(self,email,full_name,password=None, is_staff=False,is_active=True): #must need 'required fields' as Arguments
 		if not email:
 			raise ValueError("Users must have an Email Address")
 
@@ -19,7 +19,7 @@ class UserManager(BaseUserManager):
 			)
 		user_obj.set_password(password) # Set or change User Password
 		user_obj.staff= is_staff
-		user_obj.admin= is_admin
+		user_obj.admin= is_staff
 		user_obj.active= is_active
 		user_obj.save(using = self._db)
 		return user_obj	
@@ -32,6 +32,7 @@ class UserManager(BaseUserManager):
 				password=password,
 				is_staff=True
 		)
+		print('Staff User Created')
 		return user
 
 		# Creating super-user
@@ -40,8 +41,7 @@ class UserManager(BaseUserManager):
 				email,
 				full_name,
 				password=password,
-				is_staff=True,
-				is_admin=True
+				is_staff=True
 		)
 		return user
 
@@ -87,10 +87,6 @@ class User(AbstractBaseUser):
 
 	@property
 	def is_staff(self):
-		return self.staff
-
-	@property
-	def is_admin(self):
 		return self.admin
 
 	@property
