@@ -18,22 +18,10 @@ class UserManager(BaseUserManager):
 				full_name = full_name
 			)
 		user_obj.set_password(password) # Set or change User Password
-		user_obj.staff= is_staff
 		user_obj.admin= is_staff
 		user_obj.active= is_active
 		user_obj.save(using = self._db)
 		return user_obj	
-
-		# Creating staff-user
-	def create_staffuser(self,email,full_name,password=None):
-		user = self.create_user(
-				email,
-				full_name,
-				password=password,
-				is_staff=True
-		)
-		print('Staff User Created')
-		return user
 
 		# Creating super-user
 	def create_superuser(self,email,full_name,password=None):
@@ -50,7 +38,6 @@ class User(AbstractBaseUser):
 	email 		= models.EmailField(max_length=255,unique=True)
 	full_name 	= models.CharField(max_length=255,blank = True,null=True)
 	active		= models.BooleanField(default= True) # Can Login pr Not?
-	staff		= models.BooleanField(default=False) # Staff User Non SuperUser
 	admin		= models.BooleanField(default=False) # Superuser
 	timestamp	= models.DateTimeField(auto_now_add=True)
 
