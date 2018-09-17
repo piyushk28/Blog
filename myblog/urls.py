@@ -15,16 +15,22 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-
+from django.contrib.auth.views import LogoutView,LoginView
 from .views import about_page,home_page
 from post.views import postListView,postDetailView
 from categories.views import categoryView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('about/', about_page, name = 'about'),
     path('', home_page, name='home'),
     path('category/<slug>/', categoryView.as_view(), name='category'),
-    # path('category/', categoryListView.as_view(), name='category2'),
+    path('login/',
+                    LoginView.as_view(
+                                    redirect_authenticated_user=True,
+                                    template_name='accounts/login.html',
+                                    ),name='login'),
+    path('logout/',LogoutView.as_view(),name='logout'),
     path('', include('post.urls',namespace ='post')),
 ]

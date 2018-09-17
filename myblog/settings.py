@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'crispy_forms',
+
     'accounts',
     'categories',
     'post',
@@ -54,6 +56,11 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'myblog.urls'
+
+# Login Redirect url
+LOGIN_URL ='login/'
+LOGIN_REDIRECT_URL  = '/'
+LOGOUT_REDIRECT_URL  = '/'
 
 TEMPLATES = [
     {
