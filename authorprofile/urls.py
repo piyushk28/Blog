@@ -1,9 +1,9 @@
 from django.urls import path,include
 
-from .views import AuthorEditView
+from .views import author_edit_view
 
 
 app_name = "authorprofile"
 urlpatterns = [
-    path('edit/', AuthorEditView.as_view(), name = 'edit_author'),
+    path('edit/', author_edit_view, name = 'edit_author'),
 ]	

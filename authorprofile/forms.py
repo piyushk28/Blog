@@ -1,14 +1,37 @@
 from django import forms
-from django.forms.widgets import TextInput
-
+from django.forms.widgets import EmailInput,TextInput
+from django.contrib.auth import get_user_model
 from .models import AuthorProfile
 
+User = get_user_model()
 class AuthorForm(forms.ModelForm):
-	def __init__(self, *args, **kwargs):
-		super(AuthorForm,self).__init__(*args,**kwargs)
-		my_user =self.instance
-		name = my_user.author.full_name
-		self.field['full_name'].initial=name
 	class Meta:
 		model = AuthorProfile
-		fields = ('title','description','image')
+		fields = ('image','title','description')
+		widgets = {
+					'title': TextInput(
+						attrs = {
+							'class':'form-control',
+							'placeholder':'Your title'
+						}
+					),
+					'description':TextInput(
+						attrs = {
+							'class':'form-control',
+							'placeholder':'Description'
+						}
+					)
+					}
+
+class UserForm(forms.ModelForm):
+	class Meta:
+		model=User
+		fields =('full_name',)
+		widgets = {
+					'full_name':TextInput(
+						attrs = {
+							'class':'form-control',
+							'placeholder':'Your Full Name'
+						}
+					)
+					}

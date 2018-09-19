@@ -6,7 +6,9 @@
 
 {% block content %}
 <form method="POST">{% csrf_token %}
-{{form}}	
+	<input type="text" id='email' class="disabled form-control" disabled='disabled' value="{{ request.user.email }}"/>
+  {{ user_form }}
+  {{ profile_form.as_p }}
 </form>
 
 {% endblock content %}
