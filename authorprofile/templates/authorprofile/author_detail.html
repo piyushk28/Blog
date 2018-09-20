@@ -5,7 +5,7 @@
 {% endblock base_head %}
 
 {% block content %}
-{%if info == null %}
+{%if info is not '' %}
 {% autoescape off%}
 {{info}}
 {% endautoescape %}

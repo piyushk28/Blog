@@ -37,10 +37,12 @@ class AuthorDetailView(LoginRequiredMixin,TemplateView):
 		except Product.MultipleObjectsReturned:
 			qs=AuthorProfile.objects.filter(author=user)
 			instance =qs.first()
-		if instance.title or instance.description or user.full_name is null:
+		if instance.title is None or instance.description is None or user.full_name is None :
 			info = 'Please navigate to <a href={edit}>EditProfile</a> and fill your details.'.format(edit=reverse_lazy('authorProfile:edit_author'))
+			print("yo")
 		else:
-			info = null
+			info = ''
+			print("yoyooo")
 		context ={
 		'instance':instance,
 		'full_name':user.full_name,
