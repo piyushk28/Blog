@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block base_head %}
+			{{block.super}}| Profile  </title>
+{% endblock base_head %}
+
+{% block content %}
+{%if info == null %}
+{% autoescape off%}
+{{info}}
+{% endautoescape %}
+{% endif %}
+
+Email:{{email}}<br>
+Full Name:{{full_name}}<br>
+Title :{{instance.title}}<br>
+Description:{{instance.description}}<br>
+
+<a href="{% url 'authorProfile:edit_author' %}">Edit Profile</a>
+{% endblock content %}

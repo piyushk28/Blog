@@ -1,6 +1,6 @@
 from django.db import models
 from django.db.models.signals import pre_save
-
+from django.urls import reverse
 from categories.models import Category
 from myblog.utils import unique_slug_generator
 
@@ -19,7 +19,7 @@ class Post(models.Model):
 		return self.title
 
 	def get_absolute_url(self):
-		return "/{slug}/".format(slug=self.slug)
+		return reverse('post:post_detail',kwargs={'slug':self.slug})
 
 
 

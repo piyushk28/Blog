@@ -30,12 +30,17 @@ class AuthorProfile(models.Model):
 	description			= models.TextField(null=True, blank=True)
 	image				= models.ImageField(upload_to=upload_image_path, null=True, blank=True)
 
-
+	def __str__(self):
+		return self.author.email
 
 def post_save_assign_user(sender,instance,created,*args,**kwargs):
 	user_obj = instance
 	if created:
 		author_obj =AuthorProfile.objects.create(author=user_obj)
-		author_obj.save()
 
 post_save.connect(post_save_assign_user,sender=User)
+
+def post_save_user(sender,instance,*args,**kwargs):
+	instance.authorProfile.save()
+	
+post_save.connect(post_save_user,sender=User)

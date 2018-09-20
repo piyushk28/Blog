@@ -16,7 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
-from django.urls import path,include
+from django.urls import include
+from django.conf.urls import url
+
 from django.contrib.auth.views import LogoutView,LoginView
 from .views import about_page,home_page
 from post.views import postListView,postDetailView
@@ -24,17 +26,17 @@ from categories.views import categoryView
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('about/', about_page, name = 'about'),
-    path('', home_page, name='home'),
-    path('category/<slug>/', categoryView.as_view(), name='category'),
-    path('login/',LoginView.as_view(
+    url(r'^admin/', admin.site.urls),
+    url(r'^about/$', about_page, name = 'about'),
+    url(r'^$', home_page, name='home'),
+    url(r'^category/(?P<slug>[\w-]+)/$', categoryView.as_view(), name='category'),
+    url(r'^login/$',LoginView.as_view(
                                     redirect_authenticated_user=True,
                                     template_name='accounts/login.html',
                                     ),name='login'),
-    path('logout/',LogoutView.as_view(),name='logout'),
-    path('', include('post.urls',namespace ='post')),
-    path('author/', include('authorprofile.urls',namespace ='authorProfile')),
+    url(r'^logout/$',LogoutView.as_view(),name='logout'),
+    url(r'^posts/', include('post.urls',namespace ='post')),
+    url(r'^author/', include('authorprofile.urls',namespace ='authorProfile')),
 ]
 
 if settings.DEBUG:

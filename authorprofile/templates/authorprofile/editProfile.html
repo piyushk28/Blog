@@ -6,9 +6,12 @@
 
 {% block content %}
 <form method="POST">{% csrf_token %}
-	<input type="text" id='email' class="disabled form-control" disabled='disabled' value="{{ request.user.email }}"/>
-  {{ user_form }}
+	<label for='email'>Email:</label>
+	<input type="text" id='email' class="disabled form-control"   disabled='disabled' value="{{ request.user.email }}"/>
+  <div class='my-3'>{{ user_form }}</div>
   {{ profile_form.as_p }}
+  <button type ='submit' class='btn btn-default my-3'>Save</button>
+
 </form>
 
 {% endblock content %}
