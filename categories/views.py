@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.views.generic import ListView
 
 from post.models import Post
+from .forms import CategoryForm
 from .models import Category
 
 # Create your views here.
@@ -35,4 +36,12 @@ class categoryView(ListView):
 		post_qs = Post.objects.filter(category__slug__exact = category_slug)
 		return post_qs
 
-
+def add_category_view(request):
+	form = CategoryForm
+	context = {
+	'Categoryform':form
+	}
+	if form.is_valid():
+		form.save()
+		return redirect('post:create')
+	return render(request,'snippets/add_category.html',context)

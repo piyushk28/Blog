@@ -33,6 +33,12 @@ class AuthorProfile(models.Model):
 	def __str__(self):
 		return self.author.email
 
+	def get_full_name(self):
+		if self.author.full_name:
+			return self.author.full_name
+		else:
+			return None
+
 def post_save_assign_user(sender,instance,created,*args,**kwargs):
 	user_obj = instance
 	if created:

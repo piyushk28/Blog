@@ -5,6 +5,9 @@
 {% url 'logout' as logout_url %}
 {% url 'authorProfile:profile' as profile_url %}
 {% url 'authorProfile:edit_author' as editprofile_url %}
+{% url 'post:post_create' as createpost_url %}
+{% url 'post:my_post' as mypost_url %}
+
 <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-3">
   <a class="navbar-brand" href="{{home_url}}">Unravel</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,6 +31,8 @@
           <a class="dropdown-item {% if request.path == profile_url %}active{% endif %}" href="{{profile_url}}">Profile</a>
           <a class="dropdown-item {% if request.path == editprofile_url %}active{% endif %}" href="{{editprofile_url}}">Edit Profile</a>
           <div class="dropdown-divider"></div>
+          <a class="dropdown-item {% if request.path == createpost_url %}active{% endif %}" href="{{createpost_url}}">Create New Post</a>
+          <a class="dropdown-item {% if request.path == mypost_url %}active{% endif %}" href="{{mypost_url}}">My Post</a>
           <a class="dropdown-item" href="#">Something else here</a>
         </div>
       </li>

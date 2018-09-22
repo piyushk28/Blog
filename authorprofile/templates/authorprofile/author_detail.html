@@ -10,7 +10,9 @@
 {{info}}
 {% endautoescape %}
 {% endif %}
-
+{% if instance.image %}
+<img src="{{instance.image.url}}" alt="{{full_name}}"><br>
+{% endif  %}
 Email:{{email}}<br>
 Full Name:{{full_name}}<br>
 Title :{{instance.title}}<br>

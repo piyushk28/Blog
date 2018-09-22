@@ -12,7 +12,7 @@
 	{{object.body}}
 	{% endautoescape %}<br>
 	<hr>
-	<h5 >Author : {{object.author}}</h5>
+	<h5 >Author : {{object.author.get_full_name}}</h5>
 {% endblock content %}
 
 

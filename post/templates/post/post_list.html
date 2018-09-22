@@ -11,14 +11,14 @@
 {% endblock base_head %}
 
 {% block content %}
-{% if object_List %}
+{% if object_List|length < 0 %} 
+	<h3 class="text-center">Sorry, Posts will be added soon........</h3>
+{% else %}
 	{% for obj in object_list %}
 	<div class = col-lg-2></div>
 	{% include "snippets/card.html" with instance=obj %}
 	<div class = col-lg-2></div>
-		{% endfor %}
-{% else %}
-<h3 class="text-center">Sorry, Posts will be added soon........</h3>
+	{% endfor %}
 {% endif %}
 {% endblock content %}
 
