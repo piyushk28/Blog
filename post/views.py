@@ -4,7 +4,7 @@ from django.http import Http404
 from django.views.generic import ListView, DetailView,CreateView
 from django.urls import reverse_lazy
 
-from .forms import PostCreateForm
+from .forms import PostCreateForm,PostEditForm
 from .models import Post
 
 
@@ -60,3 +60,23 @@ class AuthorPostView(ListView):
 			return qs
 		else:
 			return None
+	
+def edit_post_view(request,slug):
+	try:
+		instance = Post.objects.get(slug__exact =slug,active=True)
+	except Post.DoesNotExist:
+		raise Http404('Page Not Found')
+	except Post.MultipleObjectsReturned:
+		qs =Post.objects.filter(slug__exact=slug,active=True)
+		instance= qs.first()
+	except:
+		raise  Http404("Bad Request")
+
+	form = PostEditForm(request.POST or None,instance=instance)
+
+	if form.is_valid():
+		form.save()
+		return redirect('post:post_list')
+
+
+	return render(request,'post/create.html',{'form':form})

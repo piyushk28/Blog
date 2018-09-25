@@ -19,7 +19,7 @@ class SearchPostView(ListView):
 			qs = Post.objects.filter(Q(title__icontains=query) |
 										Q(body__icontains=query) |
 										Q(category__title__icontains=query) |
-										Q(tags__title__icontains=query))
+										Q(tags__title__icontains=query)).distinct()
 			print(qs)
 			return qs
 		return Post.objects.filter(featured=True)
