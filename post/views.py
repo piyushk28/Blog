@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect, get_object_or_404
 from django.http import Http404
 from django.views.generic import ListView, DetailView,CreateView
 from django.urls import reverse_lazy
@@ -14,12 +14,7 @@ class postListView(ListView):
 	def get_queryset(self, *args, **kwargs):
 		request=self.request
 		qs=Post.objects.filter(active=True)
-		if qs.exists():
-			print('exist')
-			return qs
-		else:
-			print("don't exist")
-			return None
+		return qs
 
 
 class postDetailView(DetailView):
@@ -29,21 +24,21 @@ class postDetailView(DetailView):
 	def get_object(self, *args, **kwargs):
 		request=self.request
 		slug = self.kwargs.get('slug')
-
 		try:
 			instance = Post.objects.get(slug__exact =slug,active=True)
 
 		except Post.DoesNotExist:
-			return Http404("Post Does Not Exist")
-
+			raise Http404('Page Not Found')
 		except Post.MultipleObjectsReturned:
 			qs =Post.objects.filter(slug__exact=slug,active=True)
 			instance= qs.first()
-
 		except:
 			raise  Http404("Bad Request")
 
 		return instance
+
+
+
 
 
 class PostCreateView(LoginRequiredMixin,CreateView):

@@ -1,16 +1,23 @@
-
 {% extends 'base.html' %}
 
 {% block base_head %}
 		{% if category_name %}
 			{{block.super}}| {{category_name}}</title>
 		{% else %}
-			{{block.super}}| Blogs  </title>
+			{{block.super}}| Search  </title>
 		{% endif %}
 
 {% endblock base_head %}
 
 {% block content %}
+
+	<div class="row mb-3">
+		{% if query %}
+		<div class="col-12 ">
+			{{object_list.count}} Results for <b>{{query}}</b>
+			<hr/>
+		</div>
+		{% endif %}
 
 {% for obj in object_list %}
 	<div class = col-lg-2></div>
@@ -20,14 +27,4 @@
 			<h3 class="text-center">Sorry, Posts will be added soon........</h3>
 {% endfor %}
 {% endblock content %}
-
-
-
-
-
-
-
-
-
-
 

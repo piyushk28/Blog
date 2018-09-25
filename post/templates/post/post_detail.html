@@ -13,6 +13,7 @@
 	{% endautoescape %}<br>
 	<hr>
 	<h5 >Author : {{object.author.get_full_name}}</h5>
+	<h5>Tags:  {% for t in object.tags.all %}{{t}},{% endfor%}</h5>
 {% endblock content %}
 
 

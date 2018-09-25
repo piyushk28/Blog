@@ -25,10 +25,10 @@ def upload_image_path(instance,filename):
 
 
 class AuthorProfile(models.Model):
-	author 				= models.OneToOneField(User, on_delete=models.CASCADE,null=True, blank=True,related_name='authorProfile')
-	title				= models.CharField(max_length=200,null=True, blank=True)
-	description			= models.TextField(null=True, blank=True)
-	image				= models.ImageField(upload_to=upload_image_path, null=True, blank=True)
+	author 				= models.OneToOneField(User, on_delete=models.CASCADE,related_name='authorProfile')
+	title				= models.CharField(max_length=200,blank=True)
+	description			= models.TextField(blank=True)
+	image				= models.ImageField(upload_to=upload_image_path,blank=True)
 
 	def __str__(self):
 		return self.author.email

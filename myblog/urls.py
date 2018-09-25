@@ -23,6 +23,7 @@ from django.contrib.auth.views import LogoutView,LoginView
 from .views import about_page,home_page
 from post.views import postListView,postDetailView
 from categories.views import categoryView
+from search.views import SearchPostView
 
 
 urlpatterns = [
@@ -35,6 +36,7 @@ urlpatterns = [
                                     template_name='accounts/login.html',
                                     ),name='login'),
     url(r'^logout/$',LogoutView.as_view(),name='logout'),
+    url(r'^search/$',SearchPostView.as_view(),name='search'),
     url(r'^posts/', include('post.urls',namespace ='post')),
     url(r'^author/', include('authorprofile.urls',namespace ='authorProfile')),
 ]

@@ -6,7 +6,7 @@ from myblog.utils import unique_slug_generator
 
 class Category(models.Model):
 
-	title		= models.CharField(max_length= 40)
+	title		= models.CharField(max_length= 40,unique= True)
 	slug		= models.SlugField(blank= True,unique= True)
 	created		= models.DateTimeField(auto_now= True)
 
